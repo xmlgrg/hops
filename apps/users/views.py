@@ -21,7 +21,7 @@ def login_haddle(request):
     user_passwd = post.get('user_passwd')
     remember_uname = post.get('remember_uname', '0')
     passwd_sha1 = sha1()
-    passwd_sha1.update(user_passwd)
+    passwd_sha1.update(user_passwd.encode("utf8"))
     user_passwd_sha1 = passwd_sha1.hexdigest()
     user_names = UserInfo.objects.filter(user_name=user_name)
     context = {'title': '登录', 'user_name': user_name, 'user_passwd': user_passwd}
