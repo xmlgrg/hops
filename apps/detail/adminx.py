@@ -50,6 +50,7 @@ class CabinetInfoAdmin(object):
     search_fields = ['cab_name', 'cab_lever']
     list_filter = ['cab_name', 'cab_lever']
 
+
 xadmin.site.register(StatisticsRecord, StatisticsRecordAdmin)
 xadmin.site.register(PhysicalServerInfo, PhysicalServerInfoAdmin)
 xadmin.site.register(VirtualServerInfo, VirtualServerInfoAdmin)

@@ -1,12 +1,12 @@
 # -*- coding:utf-8 -*-
 from django.http import JsonResponse
 from django.shortcuts import render
-from users.utils.verify import *
-from operations.models import *
+
 from scanhosts.lib.utils import prpcrypt
-from .utils.machines import *
+from users.utils.verify import *
 from .models import *
 from .utils.handdles import *
+from .utils.machines import *
 
 
 def index(request):
@@ -89,9 +89,9 @@ def detail(request, types):
     elif types == "n":
         networks = machine_obj.filter_machines(NetWorkInfo, pk=did)[0]
 
-        print("networks..................."),networks
+        print("networks..................."), networks
         item = networks.__dict__
-        print("item......................."),item
+        print("item......................."), item
         detail_name = "网络设备"
         template = 'detail/detail_n.html'
     elif types == "o":
@@ -116,7 +116,7 @@ def detail(request, types):
         detail_name = '设备操作记录'
         template = 'detail/detail_opts.html'
     context = {'title': "详情页", 'item': item, 'detail_name': detail_name, 'sn_states': sn_states}
-    return render(request, template_name=template,  context=context)
+    return render(request, template_name=template, context=context)
 
 
 @login

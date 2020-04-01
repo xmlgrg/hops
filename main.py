@@ -6,7 +6,6 @@
 
 import datetime
 import os
-import re
 
 import yaml
 
@@ -14,26 +13,18 @@ PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 # import sys
 os.environ["DJANGO_SETTINGS_MODULE"] = 'admin.settings.local_cj'
 import django
-import time
 
 django.setup()
-from scanhosts.models import HostLoginifo
-from scanhosts.util.nmap_all_server import NmapNet
 from scanhosts.util.nmap_all_server import NmapDocker
 from scanhosts.util.nmap_all_server import NmapKVM
 from scanhosts.util.nmap_all_server import NmapVMX
-from scanhosts.util.nmap_all_server import snmp_begin
 from scanhosts.util.j_filter import FilterRules
 from scanhosts.util.get_pv_relation import GetHostType
-from detail.models import PhysicalServerInfo, ConnectionInfo, OtherMachineInfo, StatisticsRecord
-from operations.models import MachineOperationsInfo
+from detail.models import PhysicalServerInfo
 
-from scanhosts.util.nmap_all_server import NetDevLogin
-from admin.settings.local_cj import BASE_DIR
 import logging
 
 logger = logging.getLogger("django")
-from apps.detail.utils.machines import Machines
 
 
 # def net_begin():

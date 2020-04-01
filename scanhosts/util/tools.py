@@ -6,13 +6,15 @@
 # Created Time: 四  6/16 11:13:39 2016
 #########################################################################
 
-from django.core.mail import send_mail
 import time
 
+from django.core.mail import send_mail
+
+
 class sendmail():
-    def __init__(self,receive_addr,sub_info,content_info):
+    def __init__(self, receive_addr, sub_info, content_info):
         sub_data = time.strftime("%Y-%m-%d_%H:%M:%S", time.localtime())
-        self.receive_addr =  receive_addr
+        self.receive_addr = receive_addr
         self.sub_info = sub_info + sub_data
         self.content_info = content_info
 

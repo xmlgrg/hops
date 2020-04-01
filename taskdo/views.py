@@ -6,12 +6,7 @@ PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 # os.environ["DJANGO_SETTINGS_MODULE"] = 'admin.settings.settings'
 # import django
 # django.setup()
-from django.shortcuts import render
 import json
-from django.http import HttpResponseRedirect, JsonResponse
-from django.http import HttpResponseRedirect, JsonResponse
-from django.shortcuts import render_to_response
-from django.template import RequestContext
 from django.http import HttpResponse
 
 from taskdo.utils.ansible_api import ANSRunner

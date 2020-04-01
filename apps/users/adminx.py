@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
-from .models import *
 import xadmin
 from xadmin import views
+from .models import *
 
 
 class UserInfoAdmin(object):

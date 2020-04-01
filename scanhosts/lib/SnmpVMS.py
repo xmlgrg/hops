@@ -13,29 +13,28 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
- 
+
 """
 Python program for listing the vms on an ESX / vCenter host
 """
- 
-from __future__ import print_function
-from pyVim.connect import SmartConnect,Disconnect
 
-import argparse
+from __future__ import print_function
+
 import atexit
-import getpass
 import ssl
+
+from pyVim.connect import SmartConnect, Disconnect
+
 
 class SnmpESXI():
 
-    def __init__(self,host,port="443",user="",passwd=""):
+    def __init__(self, host, port="443", user="", passwd=""):
         self.v_host = host
         self.v_port = port
         self.v_user = user
         self.v_pass = passwd
 
-
-    def ReturnVmInfo(self,vm, depth=1):
+    def ReturnVmInfo(self, vm, depth=1):
         """
         Print information for a particular virtual machine or recurse into a folder
         with depth protection
@@ -50,32 +49,30 @@ class SnmpESXI():
                 return
             vmList = vm.childEntity
             for c in vmList:
-                self.ReturnVmInfo(c, depth+1)
+                self.ReturnVmInfo(c, depth + 1)
             return
 
         summary = vm.summary
         v_uuid = summary.config.uuid
-        result["uuid"]=v_uuid.split('-')[-1]
-        result["name"]=summary.config.name
+        result["uuid"] = v_uuid.split('-')[-1]
+        result["name"] = summary.config.name
         return result
 
-
-
-       # print("...............summary.uuid",summary.config.uuid)
-       # print("Name       : ", summary.config.name)
-       # print("Path       : ", summary.config.vmPathName)
-       # print("Guest      : ", summary.config.guestFullName)
-       # annotation = summary.config.annotation
-       # if annotation != None and annotation != "":
-       #    print("Annotation : ", annotation)
-       # print("State      : ", summary.runtime.powerState)
-       # if summary.guest != None:
-       #    ip = summary.guest.ipAddress
-       #    if ip != None and ip != "":
-       #       print("IP         : ", ip)
-       # if summary.runtime.question != None:
-       #    print("Question  : ", summary.runtime.question.text)
-       # print("")
+    # print("...............summary.uuid",summary.config.uuid)
+    # print("Name       : ", summary.config.name)
+    # print("Path       : ", summary.config.vmPathName)
+    # print("Guest      : ", summary.config.guestFullName)
+    # annotation = summary.config.annotation
+    # if annotation != None and annotation != "":
+    #    print("Annotation : ", annotation)
+    # print("State      : ", summary.runtime.powerState)
+    # if summary.guest != None:
+    #    ip = summary.guest.ipAddress
+    #    if ip != None and ip != "":
+    #       print("IP         : ", ip)
+    # if summary.runtime.question != None:
+    #    print("Question  : ", summary.runtime.question.text)
+    # print("")
 
     def dosnmp(self):
         """
@@ -87,10 +84,10 @@ class SnmpESXI():
         context = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
         context.verify_mode = ssl.CERT_NONE
         si = SmartConnect(host=self.v_host,
-                         user=self.v_user,
-                         pwd=self.v_pass,
-                         port=int(self.v_port),
-                         sslContext=context)
+                          user=self.v_user,
+                          pwd=self.v_pass,
+                          port=int(self.v_port),
+                          sslContext=context)
         if not si:
             return ""
 
@@ -100,18 +97,20 @@ class SnmpESXI():
         result = []
         for child in content.rootFolder.childEntity:
             if hasattr(child, 'vmFolder'):
-             datacenter = child
-             vmFolder = datacenter.vmFolder
-             vmList = vmFolder.childEntity
-             for vm in vmList:
-                item_res = self.ReturnVmInfo(vm)
-                result.append(item_res)
+                datacenter = child
+                vmFolder = datacenter.vmFolder
+                vmList = vmFolder.childEntity
+                for vm in vmList:
+                    item_res = self.ReturnVmInfo(vm)
+                    result.append(item_res)
         return result
 
+
 def main():
-    se = SnmpESXI(host="192.168.8.108",user="root",passwd="qwe123!@#")
+    se = SnmpESXI(host="192.168.8.108", user="root", passwd="qwe123!@#")
     res = se.dosnmp()
-    print("res...........",res)
+    print("res...........", res)
+
 
 if __name__ == "__main__":
-   main()
+    main()

@@ -9,9 +9,10 @@
 # pip install paramiko python-nmap
 # ========================================================================
 
-from Crypto.Cipher import AES
-from binascii import b2a_hex, a2b_hex
 import re
+from binascii import b2a_hex, a2b_hex
+
+from Crypto.Cipher import AES
 
 
 def mac_trans(mac):
@@ -54,12 +55,12 @@ def machine_type_trans(mt):
     else:
         return ""
 
+
 # https://www.cnblogs.com/huangjianting/p/8666446.html
 class prpcrypt():
     """
     用于通过密钥进行重要数据的加密解密
     """
-
 
     def __init__(self):
         self.key = "okeqwnk2987#$%ql".encode('utf-8')
@@ -93,6 +94,7 @@ class prpcrypt():
         plain_text = cryptor.decrypt(a2b_hex(text))
         # return plain_text.rstrip('\0')
         return bytes.decode(plain_text).rstrip('\0')
+
 
 def getsysversion(version_list):
     """

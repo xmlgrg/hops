@@ -1,7 +1,7 @@
 # coding=utf-8
-from detail.utils import search
 from django.conf.urls import url
 
+from detail.utils import search
 from . import views
 
 urlpatterns = [
@@ -12,4 +12,3 @@ urlpatterns = [
     url(r'^oth_detail/revalue/$', views.revalue),
     url(r'^search_(\w+)/$', search.search_list),
 ]
-

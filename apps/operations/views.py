@@ -1,6 +1,6 @@
 # coding=utf-8
-from detail.models import *
 from django.shortcuts import redirect
+
 from detail.utils.machines import *
 
 
@@ -20,4 +20,3 @@ def state_handdle(request):
     machine.state = state_dict[state]
     machine.save()
     return redirect(request.session.get('path', '/'))
-

@@ -34,7 +34,10 @@ class ServersClassify(object):
 
 
 class PageDeal(object):
-    """页码处理"""
+    """
+    页码处理
+    """
+
     def __init__(self):
         pass
 
@@ -56,4 +59,3 @@ class PaginatorDeal(object):
 
     def page_obj(self, obj_list, num):
         return self.paginator_obj(obj_list).page(num)
-

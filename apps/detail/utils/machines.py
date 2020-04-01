@@ -1,11 +1,15 @@
 # -*- coding:utf-8 -*-
 from django.db.models import Q
+
 from detail.models import *
 from operations.models import *
 
 
 class Machines(object):
-    """设备查询过滤"""
+    """
+    设备查询过滤
+    """
+
     def __init__(self):
         pass
 
@@ -40,7 +44,9 @@ class Machines(object):
 
 
 class SnStates(object):
-    """设备运行状态"""
+    """
+    设备运行状态
+    """
 
     def __init__(self):
         self.machines = Machines().all_machines(MachineOperationsInfo)

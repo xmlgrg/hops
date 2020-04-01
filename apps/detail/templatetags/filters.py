@@ -1,7 +1,8 @@
 # -*- coding:utf-8 -*-
 from django.template import Library
+
 from detail.utils.machines import Machines
-from detail.models import *
+
 register = Library()
 
 
@@ -21,12 +22,14 @@ def revalue(value):
 
 @register.filter
 def get_state(state, key):
-    """设备状态"""
+    """
+    设备状态
+    """
     machines = Machines()
     # if key != '':
-        # sn_key = machines.filter_machines(ConnectionInfo, pk=key)[0].sn_key
-        # machine = machines.filter_operations(SN=sn_key)[0]
-        # state = machine.state
+    # sn_key = machines.filter_machines(ConnectionInfo, pk=key)[0].sn_key
+    # machine = machines.filter_operations(SN=sn_key)[0]
+    # state = machine.state
     state = 2
     if state == 0:
         return '已报废'
@@ -60,7 +63,9 @@ def cab_name(cab_id):
 
 @register.filter
 def netconn_states(num):
-    """用户连接网络设备状态"""
+    """
+    用户连接网络设备状态
+    """
     if num == 0:
         netconn_state = '登录失败'
     else:
@@ -70,12 +75,15 @@ def netconn_states(num):
 
 @register.filter
 def netconn_types(num):
-    """用户连接网络设备状态"""
+    """
+    用户连接网络设备状态
+    """
     if num == 1:
         netconn_state = '普通用户可登录'
     else:
         netconn_state = '超级用户可登录'
     return netconn_state
+
 
 """
 @register.filter

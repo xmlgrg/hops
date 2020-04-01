@@ -9,11 +9,14 @@ class RedisConPool(object):
 
     @staticmethod
     def getRedisConnection(db):
-        '''根据数据源标识获取Redis连接池'''
-        if db==RedisConPool.REDSI_POOL:
+        """
+        根据数据源标识获取Redis连接池
+        """
+        if db == RedisConPool.REDSI_POOL:
             args = settings.REDSI_KWARGS_LPUSH
             if settings.REDSI_LPUSH_POOL == None:
-                settings.REDSI_LPUSH_POOL = redis.ConnectionPool(host=args.get('host'), port=args.get('port'), db=args.get('db'))
+                settings.REDSI_LPUSH_POOL = redis.ConnectionPool(host=args.get('host'), port=args.get('port'),
+                                                                 db=args.get('db'))
             pools = settings.REDSI_LPUSH_POOL
         connection = redis.Redis(connection_pool=pools)
         return connection
@@ -21,7 +24,7 @@ class RedisConPool(object):
 
 class DsRedis(object):
     @staticmethod
-    def lpush(redisKey,data):
+    def lpush(redisKey, data):
         try:
             redisConn = RedisConPool.getRedisConnection(RedisConPool.REDSI_POOL)
             redisConn.lpush(redisKey, data)
@@ -38,6 +41,7 @@ class DsRedis(object):
             return data
         except:
             return False
+
     @staticmethod
     def delete(redisKey):
         try:
@@ -47,8 +51,9 @@ class DsRedis(object):
             return data
         except:
             return False
+
     @staticmethod
-    def setlock(rkey,value):
+    def setlock(rkey, value):
         try:
             redisConn = RedisConPool.getRedisConnection(RedisConPool.REDSI_POOL)
             redisConn.set(rkey, value)
@@ -59,6 +64,7 @@ class DsRedis(object):
             import traceback
             print(traceback.print_exc())
             return False
+
     @staticmethod
     def get(rkey):
         try:

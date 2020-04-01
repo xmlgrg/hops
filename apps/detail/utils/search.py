@@ -1,9 +1,10 @@
 # -*- coding:utf-8 -*-
 from django.db.models import Q
 from django.shortcuts import render
-from users.utils.verify import *
+
 from detail.models import *
 from operations.models import *
+from users.utils.verify import *
 
 
 @login
@@ -75,4 +76,3 @@ def search_list(request, types):
                        "phy_servers": phy_servers, "vir_servers": vir_servers, "networks": networks, "others": others})
     context = {"title": "搜索结果", "keywords": keywords, "page": page}
     return render(request, template_name=template, context=context)
-

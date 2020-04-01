@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
-from django.db import models
 import django.utils.timezone as timezone
+from django.db import models
 
 
 # 用户登录信息表(服务器、虚拟机)

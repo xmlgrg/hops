@@ -1,7 +1,9 @@
 # coding=utf-8
 import datetime
 from hashlib import sha1
+
 from django.shortcuts import render, redirect
+
 from .models import UserInfo
 
 
@@ -34,7 +36,7 @@ def login_haddle(request):
             response = redirect(path)
             if remember_uname == '1':
                 response.set_cookie('user_name', user_name,
-                                    expires=(datetime.datetime.now()+datetime.timedelta(days=7)))
+                                    expires=(datetime.datetime.now() + datetime.timedelta(days=7)))
             else:
                 response.set_cookie('user_name', '', max_age=-1)
             return response
