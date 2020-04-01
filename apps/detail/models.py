@@ -25,7 +25,7 @@ class ConnectionInfo(models.Model):
         verbose_name_plural = verbose_name
         db_table = "connectioninfo"
 
-#用户登录信息表(交换机、网络设备)
+# 用户登录信息表(交换机、网络设备)
 class NetConnectionInfo(models.Model):
     tel_username = models.CharField(max_length=10, default='', verbose_name=u'用户名', null=True)
     tel_userpasswd = models.CharField(max_length=40, default='', verbose_name=u'设备用户密码', null=True)

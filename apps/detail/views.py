@@ -83,9 +83,9 @@ def detail(request, types):
     elif types == "n":
         networks = machine_obj.filter_machines(NetWorkInfo, pk=did)[0]
 
-        print "networks...................",networks
+        print("networks..................."),networks
         item = networks.__dict__
-        print "item.......................",item
+        print("item......................."),item
         detail_name = "网络设备"
         template = 'detail/detail_n.html'
     elif types == "o":

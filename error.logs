@@ -35,3 +35,236 @@
 [E 20180416 17:30:58 j_filter:70] error:no sn and no mac,id is :188
 [E 20180416 17:30:58 j_filter:70] error:no sn and no mac,id is :189
 [I 20180416 17:30:58 j_filter:84] Inset data into table ConnectionInfo sucess!
+[E 20200331 22:12:48 exception:135] Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/backends/utils.py", line 65, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/backends/mysql/base.py", line 101, in execute
+    return self.cursor.execute(query, args)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/cursors.py", line 170, in execute
+    result = self._query(query)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/cursors.py", line 328, in _query
+    conn.query(q)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 517, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 732, in _read_query_result
+    result.read()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 1075, in read
+    first_packet = self.connection._read_packet()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 684, in _read_packet
+    packet.check_error()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/protocol.py", line 220, in check_error
+    err.raise_mysql_exception(self._data)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/err.py", line 109, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1146, "Table 'devops.django_session' doesn't exist")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/core/handlers/base.py", line 131, in get_response
+    response = middleware_method(request, response)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/contrib/sessions/middleware.py", line 58, in process_response
+    request.session.save()
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/contrib/sessions/backends/db.py", line 81, in save
+    return self.create()
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/contrib/sessions/backends/db.py", line 50, in create
+    self._session_key = self._get_new_session_key()
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/contrib/sessions/backends/base.py", line 164, in _get_new_session_key
+    if not self.exists(session_key):
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/contrib/sessions/backends/db.py", line 46, in exists
+    return self.model.objects.filter(session_key=session_key).exists()
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/models/query.py", line 667, in exists
+    return self.query.has_results(using=self.db)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/models/sql/query.py", line 516, in has_results
+    return compiler.has_results()
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/models/sql/compiler.py", line 845, in has_results
+    return bool(self.execute_sql(SINGLE))
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/models/sql/compiler.py", line 876, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/backends/utils.py", line 80, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/backends/utils.py", line 65, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/utils.py", line 94, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/utils/six.py", line 685, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/backends/utils.py", line 65, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/backends/mysql/base.py", line 101, in execute
+    return self.cursor.execute(query, args)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/cursors.py", line 170, in execute
+    result = self._query(query)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/cursors.py", line 328, in _query
+    conn.query(q)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 517, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 732, in _read_query_result
+    result.read()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 1075, in read
+    first_packet = self.connection._read_packet()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 684, in _read_packet
+    packet.check_error()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/protocol.py", line 220, in check_error
+    err.raise_mysql_exception(self._data)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/err.py", line 109, in raise_mysql_exception
+    raise errorclass(errno, errval)
+django.db.utils.ProgrammingError: (1146, "Table 'devops.django_session' doesn't exist")
+[E 20200331 22:12:49 basehttp:124] "GET / HTTP/1.1" 500 187720
+[W 20200331 22:12:49 base:152] Not Found: /favicon.ico
+[W 20200331 22:12:49 basehttp:124] "GET /favicon.ico HTTP/1.1" 404 3245
+[E 20200331 22:12:55 exception:135] Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/backends/utils.py", line 65, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/backends/mysql/base.py", line 101, in execute
+    return self.cursor.execute(query, args)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/cursors.py", line 170, in execute
+    result = self._query(query)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/cursors.py", line 328, in _query
+    conn.query(q)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 517, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 732, in _read_query_result
+    result.read()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 1075, in read
+    first_packet = self.connection._read_packet()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 684, in _read_packet
+    packet.check_error()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/protocol.py", line 220, in check_error
+    err.raise_mysql_exception(self._data)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/err.py", line 109, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1146, "Table 'devops.django_session' doesn't exist")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/core/handlers/base.py", line 131, in get_response
+    response = middleware_method(request, response)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/contrib/sessions/middleware.py", line 58, in process_response
+    request.session.save()
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/contrib/sessions/backends/db.py", line 81, in save
+    return self.create()
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/contrib/sessions/backends/db.py", line 50, in create
+    self._session_key = self._get_new_session_key()
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/contrib/sessions/backends/base.py", line 164, in _get_new_session_key
+    if not self.exists(session_key):
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/contrib/sessions/backends/db.py", line 46, in exists
+    return self.model.objects.filter(session_key=session_key).exists()
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/models/query.py", line 667, in exists
+    return self.query.has_results(using=self.db)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/models/sql/query.py", line 516, in has_results
+    return compiler.has_results()
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/models/sql/compiler.py", line 845, in has_results
+    return bool(self.execute_sql(SINGLE))
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/models/sql/compiler.py", line 876, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/backends/utils.py", line 80, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/backends/utils.py", line 65, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/utils.py", line 94, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/utils/six.py", line 685, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/backends/utils.py", line 65, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/backends/mysql/base.py", line 101, in execute
+    return self.cursor.execute(query, args)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/cursors.py", line 170, in execute
+    result = self._query(query)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/cursors.py", line 328, in _query
+    conn.query(q)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 517, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 732, in _read_query_result
+    result.read()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 1075, in read
+    first_packet = self.connection._read_packet()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 684, in _read_packet
+    packet.check_error()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/protocol.py", line 220, in check_error
+    err.raise_mysql_exception(self._data)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/err.py", line 109, in raise_mysql_exception
+    raise errorclass(errno, errval)
+django.db.utils.ProgrammingError: (1146, "Table 'devops.django_session' doesn't exist")
+[E 20200331 22:12:55 basehttp:124] "GET / HTTP/1.1" 500 187856
+[E 20200331 22:12:56 exception:135] Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/backends/utils.py", line 65, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/backends/mysql/base.py", line 101, in execute
+    return self.cursor.execute(query, args)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/cursors.py", line 170, in execute
+    result = self._query(query)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/cursors.py", line 328, in _query
+    conn.query(q)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 517, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 732, in _read_query_result
+    result.read()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 1075, in read
+    first_packet = self.connection._read_packet()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 684, in _read_packet
+    packet.check_error()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/protocol.py", line 220, in check_error
+    err.raise_mysql_exception(self._data)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/err.py", line 109, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.ProgrammingError: (1146, "Table 'devops.django_session' doesn't exist")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/core/handlers/base.py", line 131, in get_response
+    response = middleware_method(request, response)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/contrib/sessions/middleware.py", line 58, in process_response
+    request.session.save()
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/contrib/sessions/backends/db.py", line 81, in save
+    return self.create()
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/contrib/sessions/backends/db.py", line 50, in create
+    self._session_key = self._get_new_session_key()
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/contrib/sessions/backends/base.py", line 164, in _get_new_session_key
+    if not self.exists(session_key):
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/contrib/sessions/backends/db.py", line 46, in exists
+    return self.model.objects.filter(session_key=session_key).exists()
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/models/query.py", line 667, in exists
+    return self.query.has_results(using=self.db)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/models/sql/query.py", line 516, in has_results
+    return compiler.has_results()
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/models/sql/compiler.py", line 845, in has_results
+    return bool(self.execute_sql(SINGLE))
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/models/sql/compiler.py", line 876, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/backends/utils.py", line 80, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/backends/utils.py", line 65, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/utils.py", line 94, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/utils/six.py", line 685, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/backends/utils.py", line 65, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/jerry/Library/Python/3.6/lib/python/site-packages/django/db/backends/mysql/base.py", line 101, in execute
+    return self.cursor.execute(query, args)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/cursors.py", line 170, in execute
+    result = self._query(query)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/cursors.py", line 328, in _query
+    conn.query(q)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 517, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 732, in _read_query_result
+    result.read()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 1075, in read
+    first_packet = self.connection._read_packet()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/connections.py", line 684, in _read_packet
+    packet.check_error()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/protocol.py", line 220, in check_error
+    err.raise_mysql_exception(self._data)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/pymysql/err.py", line 109, in raise_mysql_exception
+    raise errorclass(errno, errval)
+django.db.utils.ProgrammingError: (1146, "Table 'devops.django_session' doesn't exist")
+[E 20200331 22:12:56 basehttp:124] "GET / HTTP/1.1" 500 187855

@@ -147,39 +147,39 @@ class NmapDev(object):
                  host_list.append(ip)
                  for port in port_list:
                      try:
-                         print "Scan ip %s ..... Port %s"%(ip,port)
+                         print("Scan ip %s ..... Port %s"%(ip,port))
                          logger.info("Scan ip %s ..... Port %s"%(ip,port))
                          tm = telnetlib.Telnet(host=ip,port=port,timeout=4)
                          tm_res = tm.read_until("\n",timeout=4)
                          if tm_res:
-                             if re.search("ssh",tm_res.lower()):
-                                 print ip,port
+                             if re.search("ssh",tm_res.lower().decode("utf8")):
+                                 print(ip,port)
                                  if ip not in self.black_list:
                                      ssh_info[ip]=port
                                      connet = "IP:%s Port:%s Server:%s"%(ip,port,tm_res.lower())
                                      logger.info("IP:%s Port:%s Server:%s"%(ip,port,tm_res.lower()))
-                                     print "[?]IP:%s Port:%s Server:%s"%(ip,port,tm_res)
+                                     print("[?]IP:%s Port:%s Server:%s"%(ip,port,tm_res))
                              else:
                                  if ip not in unkown_list and ip not in ssh_info.keys():
                                     unkown_list.append(ip)
                                  logger.info("Telnet not ssh server:%s,%s,%s"%(ip,port,tm_res))
-                                 print "Open Res.....",ip,port,tm_res
+                                 print("Open Res.....",ip,port,tm_res)
                          else:
                              if ip not in unkown_list and ip not in ssh_info.keys():
                                 unkown_list.append(ip)
                                 logger.info("Telnet no data:%s,%s"%(ip,port))
-                             print "Open....",ip,port
+                             print("Open....",ip,port)
                      except EOFError as e:
                          if ip not in unkown_list and ip not in ssh_info.keys():
                             unkown_list.append(ip)
                          unkown_list.append(ip)
                          logger.exception("Telnet port EOFError:%s,%s,%s"%(ip,port,e))
-                         print "Open....",ip,port
+                         print("Open....",ip,port)
                      except Exception as e:
                          if ip not in unkown_list and ip not in ssh_info.keys():
                             unkown_list.append(ip)
                          logger.exception("Telnet port Exception:%s,%s,%s"%(ip,port,e))
-                         print "error...",ip,port,e
+                         print("error...",ip,port,e)
         return ssh_info,host_list,list(set(unkown_list))
 
     def try_login(self,sship_list,password_list,syscmd_list):
@@ -211,12 +211,12 @@ class NmapDev(object):
                         sys_sn = sn_trans(res["dmidecode -s system-serial-number"])
                         system_info = getsysversion([res["cat /etc/issue"],res["cat /etc/redhat-release"]])
                         machine_type = machine_type_trans(res["dmidecode -s system-manufacturer"] + res["dmidecode -s system-product-name"])
-                        print "ssh login and exec command:%s",res
+                        print("ssh login and exec command:%s",res)
                         logger.info("ssh login and exec command:%s",res)
                         self.can_login_lst[ip] = (port,password,'root',system_info,sys_hostname,sys_mac,sys_sn,machine_type)
                     elif res["status"] == "failed" and re.search(r"reading SSH protocol banner",res["res"]):
                         # print "res res..........................",res['res']
-                        print "IP:%s Connection closed by remote host,Sleep 60 (s).................. "%ip,res
+                        print("IP:%s Connection closed by remote host,Sleep 60 (s).................. "%ip,res)
                         time.sleep(60)
                     else:
                         if ip not in self.not_login_lst.keys() and ip not in self.can_login_lst.keys():
@@ -253,12 +253,12 @@ class NmapDev(object):
                         sys_sn = sn_trans(res["dmidecode -s system-serial-number"])
                         system_info = getsysversion([res["cat /etc/issue"],res["cat /etc/redhat-release"]])
                         machine_type = machine_type_trans(res["dmidecode -s system-manufacturer"] + res["dmidecode -s system-product-name"])
-                        print "ssh login and exec command:%s",res
+                        print("ssh login and exec command:%s",res)
                         logger.info("ssh login and exec command:%s",res)
                         self.can_login_lst[port] = (ip,password,'root',system_info,sys_hostname,sys_mac,sys_sn,machine_type)
                     elif res["status"] == "failed" and re.search(r"reading SSH protocol banner",res["res"]):
                         # print "res res..........................",res['res']
-                        print "IP:%s Connection closed by remote host,Sleep 60 (s).................. "%port,res
+                        print("IP:%s Connection closed by remote host,Sleep 60 (s).................. "%port,res)
                         time.sleep(60)
                     else:
                         if port not in self.not_login_lst.keys() and port not in self.can_login_lst.keys():

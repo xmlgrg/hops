@@ -13,7 +13,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse
 
-from utils.ansible_api import ANSRunner
+from taskdo.utils.ansible_api import ANSRunner
 from scanhosts.lib.utils import prpcrypt
 
 from taskdo.utils.base.MgCon import *
@@ -44,12 +44,12 @@ def adhoc_task(request):
         group_name = init_jobs[u"group_name"] if not init_jobs[u"group_name"] else "imoocc"
         taskid = init_jobs.get("taskid")
         if  not sn_keys or not exec_args or not taskid:
-            result = {'status':"failed","code":002,"info":u"传入的参数mod_type不匹配！"}
+            result = {'status':"failed","code": "002","info":u"传入的参数mod_type不匹配！"}
             return HttpResponse(json.dumps(result), content_type="application/json")
         else:
             rlog = InsertAdhocLog(taskid=taskid)
         if mod_type not in ("shell","yum","copy"):
-            result = {'status':"failed","code":003,"info":u"传入的参数不完整！"}
+            result = {'status':"failed","code": "003","info":u"传入的参数不完整！"}
             rlog.record(id=10008)
         else:
             try:
@@ -113,9 +113,9 @@ def adhoc_task(request):
 
             except Exception as e:
                 import traceback
-                print traceback.print_exc()
+                print(traceback.print_exc())
                 DsRedis.setlock("tasklock",0)
-                result = {"status":"failed","code":005,"info":e}
+                result = {"status":"failed","code": "005","info":e}
             finally:
                 return HttpResponse(json.dumps(result), content_type="application/json")
 

@@ -28,7 +28,7 @@ class Mongodb(object):
             },{"_id":0}).sort([('time', 1)])
             for res in logs:
                 result.append(res)
-            print "...........................mongo",result,keywords
+            print("...........................mongo"),result,keywords
             return result
         else:
             return False
@@ -52,12 +52,12 @@ class InsertAdhocLog():
         time = datetime.now()
         record_info = self.map_id_log[id] if self.map_id_log[id] else input_con
         content = {"taskid":self.task_id,"time":time,"id":id,"desc":record_info}
-        print "........................insert content",content
+        print("........................insert content"),content
         mg.insert(content)
 
     def getrecord(self):
         mg = Mongodb(collection='taskadhoclog')
         result = mg.filter(self.task_id)
-        print "........................get result",result
+        print("........................get result"),result
         if result:
             return  result

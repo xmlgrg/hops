@@ -214,7 +214,7 @@ class ANSRunner(object):
             constants.HOST_KEY_CHECKING = False #关闭第一次使用ansible连接客户端是输入命令
             tqm.run(play)
         except Exception as err:
-            print traceback.print_exc()
+            print(traceback.print_exc())
             # DsRedis.OpsAnsibleModel.lpush(self.redisKey,data=err)
             # if self.logId:AnsibleSaveResult.Model.insert(self.logId, err)
         finally:

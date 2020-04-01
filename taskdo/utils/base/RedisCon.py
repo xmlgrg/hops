@@ -57,7 +57,7 @@ class DsRedis(object):
             redisConn = None
         except:
             import traceback
-            print traceback.print_exc()
+            print(traceback.print_exc())
             return False
     @staticmethod
     def get(rkey):
