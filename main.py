@@ -15,6 +15,7 @@ PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 os.environ["DJANGO_SETTINGS_MODULE"] = 'admin.settings.local_cj'
 import django
 import time
+
 django.setup()
 from scanhosts.models import HostLoginifo
 from scanhosts.util.nmap_all_server import NmapNet
@@ -24,15 +25,15 @@ from scanhosts.util.nmap_all_server import NmapVMX
 from scanhosts.util.nmap_all_server import snmp_begin
 from scanhosts.util.j_filter import FilterRules
 from scanhosts.util.get_pv_relation import GetHostType
-from detail.models import  PhysicalServerInfo,ConnectionInfo,OtherMachineInfo,StatisticsRecord
-from operations.models import  MachineOperationsInfo
+from detail.models import PhysicalServerInfo, ConnectionInfo, OtherMachineInfo, StatisticsRecord
+from operations.models import MachineOperationsInfo
 
 from scanhosts.util.nmap_all_server import NetDevLogin
 from admin.settings.local_cj import BASE_DIR
 import logging
+
 logger = logging.getLogger("django")
 from apps.detail.utils.machines import Machines
-
 
 
 # def net_begin():
@@ -45,12 +46,11 @@ from apps.detail.utils.machines import Machines
 #     print "...................",nm_res
 
 
-
 def main():
-    '''
+    """
     读取扫描所需配置文件
     :return:
-    '''
+    """
     s_conf = yaml.load(file('conf/scanhosts.yaml'))
     s_nets = s_conf['hostsinfo']['nets']
     s_ports = s_conf['hostsinfo']['ports']
@@ -116,9 +116,6 @@ def main():
     #     if n_login_sw == "True":
     #         res = NetDevLogin(dev_ips=net_login_dct,backup_sw=n_backup_sw,back_server=n_backup_sever)
 
-
-
-
     '''
     规则：主机信息，去重、生成关系字典
     '''
@@ -134,7 +131,7 @@ def main():
     '''
     更新宿主机类型中表对应关系
     '''
-    ip_key_dic = {v:k for k,v in key_ip_dic.items()}
+    ip_key_dic = {v: k for k, v in key_ip_dic.items()}
     docker_p_list = p_relate_dic["docker-containerd"]
     kvm_p_list = p_relate_dic["qemu-system-x86_64"]
     vmware_p_list = p_relate_dic["vmx"]
@@ -145,11 +142,10 @@ def main():
     for item in vmware_p_list:
         PhysicalServerInfo.objects.filter(conn_phy__sn_key=ip_key_dic[item]).update(vir_type="2")
 
-
     '''
     扫描docker的宿主机和虚拟服务的关系
     '''
-    ds = NmapDocker(s_cmds,d_pass,ip_key_dic)
+    ds = NmapDocker(s_cmds, d_pass, ip_key_dic)
     ds.do_nmap(docker_p_list)
     #
     # '''
@@ -161,7 +157,7 @@ def main():
     '''
     扫描ESXI虚拟机配置
     '''
-    ne = NmapVMX(vmware_p_list,ip_key_dic)
+    ne = NmapVMX(vmware_p_list, ip_key_dic)
     ne.dosnmp()
     #
     # '''
@@ -190,12 +186,12 @@ def main():
     #                                 other_count=info_dic['other_c'],vmx_count=info_dic['vmx_c'],kvm_count=info_dic['kvm_c'],docker_count=info_dic['docker_c'])
     #
 
-
     endtime = datetime.datetime.now()
     totaltime = (endtime - starttime).seconds
 
-    logger.info("{Finish:Use time %s s}"%totaltime)
-    print "{Finish:Use time %s s}"%totaltime
+    logger.info("{Finish:Use time %s s}" % totaltime)
+    print("{Finish:Use time %s s}" % totaltime)
+
 
 if __name__ == "__main__":
     main()

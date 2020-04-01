@@ -13,12 +13,16 @@ def report(request):
 
 
 def histogram(request):
-    """柱状图"""
+    """
+    柱状图
+    """
     context = {'title': '柱状图'}
     return render(request, 'reports/histogram.html', context)
 
 
 def rack(request):
-    """机柜布置图"""
+    """
+    机柜布置图
+    """
     context = {'title': '机柜布置图'}
     return render(request, 'reports/rack.html', context)

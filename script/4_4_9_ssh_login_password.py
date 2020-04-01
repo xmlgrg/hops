@@ -10,7 +10,9 @@
 import pexpect
 
 def login_ssh_passwd(port="",user="",host="",passwd=""):
-    '''函数：用于实现pexepect实现ssh的自动化用户密码登录'''
+    """
+    函数：用于实现pexepect实现ssh的自动化用户密码登录
+    """
 
     # print 'ssh -p %s %s@%s' % (port,user, host)
     if  port and user and host and passwd:
@@ -25,17 +27,19 @@ def login_ssh_passwd(port="",user="",host="",passwd=""):
         index = ssh.expect (["#", pexpect.EOF, pexpect.TIMEOUT])
 
         if index == 0:
-            print "logging in as root!"
+            print("logging in as root!")
             ssh.interact()
         elif index == 1:
-            print "logging process exit!"
+            print("logging process exit!")
         elif index == 2:
-            print "logging timeout exit"
+            print("logging timeout exit")
     else:
-        print "Parameter error!"
+        print("Parameter error!")
 
 def login_ssh_key(keyfile="",user="",host="",port=""):
-    '''函数：用于实现pexepect实现ssh的自动化密钥登录'''
+    """
+    函数：用于实现pexepect实现ssh的自动化密钥登录
+    """
 
     if  port and user and host and keyfile:
         ssh = pexpect.spawn('ssh -i %s -p %s %s@%s' % (keyfile,port,user, host))
@@ -47,17 +51,19 @@ def login_ssh_key(keyfile="",user="",host="",port=""):
         else:
             index = ssh.expect (["#", pexpect.EOF, pexpect.TIMEOUT])
         if index == 0:
-            print "logging in as root!"
+            print("logging in as root!")
             ssh.interact()
         elif index == 1:
-            print "logging process exit!"
+            print("logging process exit!")
         elif index == 2:
-            print "logging timeout exit"
+            print("logging timeout exit")
     else:
-        print "Parameter error!"
+        print("Parameter error!")
 
 def main():
-    '''主函数：实现两种方式分别的登录'''
+    """
+    主函数：实现两种方式分别的登录
+    """
     # login_ssh_passwd(port='22',user='root',host='192.168.1.101',passwd='imooccs')
     login_ssh_key(keyfile="/tmp/id_rsa",port='22',user='root',host='192.168.1.101')
 

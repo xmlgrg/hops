@@ -6,4 +6,4 @@ from django.test import TestCase
 uname = raw_input("input your name")
 name  = u"imoocc"
 if uname == name:
-    print u"You name is : 幕客"
+    print(u"You name is : 幕客")

@@ -146,13 +146,13 @@ LOGGING = {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'formatter': 'verbose',
-            'filename': '%s/error.logs'%BASE_DIR,
+            'filename': '%s/error.logs'% (BASE_DIR + "/logs"),
         },
     },
     'loggers': {
         'django': {
             'handlers': ['file'],
-            'level': 'INFO',
+            'level': 'DEBUG',
             'propagate': True,
         },
     },
@@ -163,5 +163,5 @@ MONGO_HOST = '192.168.1.108'
 MONGO_PORT = '27017'
 
 # Redis Con
-REDSI_KWARGS_LPUSH = {"host":'192.168.1.108','port':6379,'db':3}
+REDSI_KWARGS_LPUSH = {"host":'127.0.0.1','port':6379,'db':3}
 REDSI_LPUSH_POOL = None

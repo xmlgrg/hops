@@ -10,7 +10,9 @@ from .utils.handdles import *
 
 
 def index(request):
-    """首页"""
+    """
+    首页
+    """
     machines = Machines()
     cabinets = machines.all_machines(CabinetInfo)
     phy_servers = machines.all_machines(PhysicalServerInfo)
@@ -27,7 +29,9 @@ def index(request):
 
 @login
 def machine_list(request):
-    """设备列表"""
+    """
+    设备列表
+    """
     sn_states = SnStates().sn_states()
     types = request.GET.get("type")
     machines = Machines()
@@ -66,7 +70,9 @@ def machine_list(request):
 @login
 @level
 def detail(request, types):
-    """详情页"""
+    """
+    详情页
+    """
     did = int(request.GET.get('dID'))
     machine_obj = Machines()
     sn_states = SnStates().sn_states()
@@ -115,7 +121,9 @@ def detail(request, types):
 
 @login
 def classify(request):
-    """分类列表"""
+    """
+    分类列表
+    """
     types = request.GET.get("type")
     p = int(request.GET.get('p'))
     machines = Machines()
@@ -155,7 +163,9 @@ def classify(request):
 @login
 @level
 def revalue(request):
-    """其它设备参数修改"""
+    """
+    其它设备参数修改
+    """
     value = request.GET.get('value')
     name = request.GET.get('name')
     others = Machines().filter_machines(OtherMachineInfo, pk=request.GET.get('dID'))[0]

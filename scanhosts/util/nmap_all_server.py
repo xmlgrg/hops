@@ -54,9 +54,9 @@ def snmp_begin(nmap_type,ports,password_list,imoocc_key_file,syscmd_list,black_l
     canlogin_list,notlogin_list = nm_item.try_login(sship_list,password_list,syscmd_list)
     key_login_list,key_not_login_list = nm_item.try_key_login(notlogin_list,imoocc_key_file,syscmd_list)
 
-    print "Password Login ...",canlogin_list,notlogin_list
+    print("Password Login ...",canlogin_list,notlogin_list)
     logger.info("Use password login:%s,%s"%(canlogin_list,notlogin_list))
-    print "Key Login ...",key_login_list,key_not_login_list
+    print("Key Login ...",key_login_list,key_not_login_list)
     logger.info("Use key login:%s,%s"%(key_login_list,key_not_login_list))
 
     email_message = u"可以ssh 用户密码登录的服务器列表 \n %s \n 可以ssh 用户密钥登录的服务器列表 \n %s \n 无法ssh登录列表 \n %s \n 未知主机 \n %s"%(canlogin_list,\
@@ -215,13 +215,13 @@ class NmapDev(object):
                         logger.info("ssh login and exec command:%s",res)
                         self.can_login_lst[ip] = (port,password,'root',system_info,sys_hostname,sys_mac,sys_sn,machine_type)
                     elif res["status"] == "failed" and re.search(r"reading SSH protocol banner",res["res"]):
-                        # print "res res..........................",res['res']
+                        # print("res res..........................",res['res'])
                         print("IP:%s Connection closed by remote host,Sleep 60 (s).................. "%ip,res)
                         time.sleep(60)
                     else:
                         if ip not in self.not_login_lst.keys() and ip not in self.can_login_lst.keys():
                             self.not_login_lst[ip] = port
-                        # print ip,port,password,traceback.print_exc()
+                        # print(ip,port,password,traceback.print_exc())
         return self.can_login_lst,self.not_login_lst
 
     def try_docker_login(self,sship_list,password_list,syscmd_list):
@@ -278,12 +278,12 @@ class NmapDev(object):
 
         # import traceback
         for ip,port in sship_list.items():
-            print "try key login....",ip,port
+            print("try key login....",ip,port)
             logger.info("Try ssh key login : %s,%s"%(ip,port))
             keyfile = allkeyfile[0]
             if ip not in self.can_key_login_lst.keys():
                 logger.info("Try ssh idrsa key : %s,%s,%s"%(ip,port,keyfile))
-                print 'try idrsakey....',ip,port,keyfile
+                print('try idrsakey....',ip,port,keyfile)
                 login_info = (ip,int(port),'root',keyfile)
                 doobj = J_ssh_do(login_info)
                 res = doobj.rsa_do(login_info,syscmd_list)
@@ -297,7 +297,7 @@ class NmapDev(object):
                 if res["status"] == "failed":
                         keyfile = allkeyfile[1]
                         logger.info("try iddsa login...%s,%s,%s"%(ip,port,keyfile))
-                        print "try iddsa login...",ip,port,keyfile
+                        print("try iddsa login...",ip,port,keyfile)
                         login_info = (ip,port,'root', keyfile)
                         doobj = J_ssh_do(login_info)
                         res = doobj.dsa_do(login_info,syscmd_list)
@@ -313,7 +313,7 @@ class NmapDev(object):
                         else:
                             keyfile = allkeyfile[2]
                             logger.info("try Non-root idrsa login:%s,%s"%(ip,port))
-                            print "try Non-root idrsa login...",ip,port
+                            print("try Non-root idrsa login...",ip,port)
                             password = '0koooAdmin'
                             login_info = (ip,port,'imoocc', keyfile,password)
                             doobj = J_ssh_do(login_info)
@@ -428,7 +428,7 @@ class NmapDocker(NmapDev):
             port_list = res["docker ps |awk -F '->' '{print $1}'|grep -v 'CONTAINER'|awk 'BEGIN{FS~/s+/;}{print $NF\" \"$1\" \"$2;}'|sed s/0.0.0.0://"].split("\n")
             for d_item in port_list:
                 if d_item:
-                    print "...............d_item",d_item
+                    print("...............d_item",d_item)
                     d_port,d_id,d_dn = re.split('\s+',d_item)[:3]
                     d_cid = d_id + d_dn
                     docker_dct[d_port] = sn_trans(d_cid)
@@ -517,9 +517,9 @@ class NmapVMX():
                         v_obj.update(vir_phy=py_id,server_type=u"VMX:%s"%(v_vmname))
                     else:
                         logger.error("Error:no vmx matched! %s %s"%(v_uuid,v_vmname))
-                        print "Error:no vmx matched! %s %s"%(v_uuid,v_vmname)
+                        print("Error:no vmx matched! %s %s"%(v_uuid,v_vmname))
             except Exception as e:
-                print "Vmware host sdk connect failed!%s"%(p_item[0].ssh_hostip)
+                print("Vmware host sdk connect failed!%s"%(p_item[0].ssh_hostip))
                 logger.error("Error:Vmware host sdk connect failed!%s"%(p_item[0].ssh_hostip))
 
 def NetDevLogin(dev_ips={},backup_sw="False",back_server=""):

@@ -25,6 +25,7 @@ class ConnectionInfo(models.Model):
         verbose_name_plural = verbose_name
         db_table = "connectioninfo"
 
+
 # 用户登录信息表(交换机、网络设备)
 class NetConnectionInfo(models.Model):
     tel_username = models.CharField(max_length=10, default='', verbose_name=u'用户名', null=True)
@@ -40,10 +41,12 @@ class NetConnectionInfo(models.Model):
     sn_key = models.CharField(max_length=256, verbose_name=u"唯一设备ID", default="")
 
     dev_info = models.ForeignKey('NetWorkInfo')
+
     class Meta:
         verbose_name = u'网络设备用户登录信息'
         verbose_name_plural = verbose_name
         db_table = "netconnectioninfo"
+
 
 # 机柜的信息
 class CabinetInfo(models.Model):
@@ -112,7 +115,6 @@ class NetWorkInfo(models.Model):
     # 网络设备所在的机柜
     net_cab = models.ForeignKey('CabinetInfo')
 
-
     class Meta:
         verbose_name = u'网络设备表'
         verbose_name_plural = verbose_name
@@ -124,7 +126,7 @@ class OtherMachineInfo(models.Model):
     sn_key = models.CharField(max_length=256, verbose_name=u'设备的唯一标识')
     machine_name = models.CharField(max_length=20, verbose_name=u'设备名称')
     remark = models.TextField(default='', verbose_name=u'备注')
-    reson_str = models.CharField(max_length=128,verbose_name=u"归纳原因",default='')
+    reson_str = models.CharField(max_length=128, verbose_name=u"归纳原因", default='')
     # 关联的机柜
     oth_cab = models.ForeignKey('CabinetInfo')
 
@@ -135,17 +137,16 @@ class OtherMachineInfo(models.Model):
 
 
 class StatisticsRecord(models.Model):
-    datatime = models.DateTimeField(verbose_name=u"更新时间",default=timezone.now().strftime('%Y-%m-%d'))
-    all_count = models.IntegerField(verbose_name=u"所有设备数量",default=0)
-    pyh_count = models.IntegerField(verbose_name=u"物理设备数量",default=0)
-    net_count = models.IntegerField(verbose_name=u"网络设备数量",default=0)
-    other_count = models.IntegerField(verbose_name=u"其他设备数量",default=0)
-    kvm_count = models.IntegerField(verbose_name=u"KVM设备数量",default=0)
-    docker_count = models.IntegerField(verbose_name=u"Docker设备数量",default=0)
-    vmx_count = models.IntegerField(verbose_name=u"VMX设备数量",default=0)
+    datatime = models.DateTimeField(verbose_name=u"更新时间", default=timezone.now().strftime('%Y-%m-%d'))
+    all_count = models.IntegerField(verbose_name=u"所有设备数量", default=0)
+    pyh_count = models.IntegerField(verbose_name=u"物理设备数量", default=0)
+    net_count = models.IntegerField(verbose_name=u"网络设备数量", default=0)
+    other_count = models.IntegerField(verbose_name=u"其他设备数量", default=0)
+    kvm_count = models.IntegerField(verbose_name=u"KVM设备数量", default=0)
+    docker_count = models.IntegerField(verbose_name=u"Docker设备数量", default=0)
+    vmx_count = models.IntegerField(verbose_name=u"VMX设备数量", default=0)
 
     class Meta:
         verbose_name = u'扫描后的汇总硬件统计信息'
         verbose_name_plural = verbose_name
         db_table = 'statisticsrecord'
-
